@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Track Fácil - Seguimiento profesional</title>
+<style>
+:root {
+  --bg-start: #0f172a;
+  --bg-end: #1e293b;
+  --card: rgba(15, 23, 42, 0.88);
+  --card-border: rgba(148, 163, 184, 0.16);
+  --accent: #4f46e5;
+  --accent-soft: rgba(79, 70, 229, 0.18);
+  --text: #e2e8f0;
+  --muted: #94a3b8;
+}
+* {
+  box-sizing: border-box;
+}
+html, body {
+  margin: 0;
+  min-height: 100%;
+}
+body {
+  font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  background: radial-gradient(circle at top left, rgba(79, 70, 229, 0.22), transparent 25%),
+              radial-gradient(circle at bottom right, rgba(16, 185, 129, 0.16), transparent 18%),
+              linear-gradient(180deg, var(--bg-start) 0%, var(--bg-end) 100%);
+  color: var(--text);
+  padding: 32px;
+}
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background: url('data:image/svg+xml,%3Csvg width="160" height="160" viewBox="0 0 160 160" fill="none" xmlns="http://www.w3.org/2000/svg"%3E%3Ccircle cx="80" cy="80" r="80" fill="%232c3e50" fill-opacity="0.08"/%3E%3C/svg%3E') repeat;
+  opacity: 0.14;
+  pointer-events: none;
+}
+.page {
+  max-width: 1180px;
+  margin: 0 auto;
+}
+.header {
+  display: grid;
+  grid-template-columns: 1.2fr 0.9fr;
+  gap: 28px;
+  align-items: center;
+  padding: 36px 0;
+}
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 18px;
+}
+.brand-mark {
+  width: 44px;
+  height: 44px;
+  border-radius: 16px;
+  background: linear-gradient(135deg, #6366f1, #0ea5e9);
+  display: grid;
+  place-items: center;
+  box-shadow: 0 18px 50px rgba(79, 70, 229, 0.18);
+}
+.brand-mark span {
+  font-size: 1.3rem;
+}
+.title {
+  font-size: clamp(2.8rem, 4vw, 4.5rem);
+  line-height: 0.98;
+  margin: 0;
+}
+.subtitle {
+  margin: 18px 0 28px;
+  max-width: 620px;
+  color: var(--muted);
+  font-size: 1.05rem;
+  line-height: 1.8;
+}
+.features {
+  display: grid;
+  gap: 16px;
+}
+.feature-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(148, 163, 184, 0.12);
+  border-radius: 18px;
+  padding: 18px 20px;
+}
+.feature-icon {
+  width: 42px;
+  height: 42px;
+  border-radius: 14px;
+  display: grid;
+  place-items: center;
+  background: rgba(79, 70, 229, 0.18);
+  color: #eef2ff;
+  font-size: 1.2rem;
+}
+.feature-title {
+  margin: 0 0 4px;
+  font-weight: 600;
+}
+.feature-text {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.96rem;
+}
+.panel {
+  background: var(--card);
+  border: 1px solid var(--card-border);
+  border-radius: 32px;
+  padding: 32px;
+  box-shadow: 0 30px 90px rgba(15, 23, 42, 0.28);
+  backdrop-filter: blur(20px);
+}
+.panel h2 {
+  margin-top: 0;
+  font-size: 1.5rem;
+}
+.panel p {
+  color: var(--muted);
+  line-height: 1.75;
+}
+.panel .panel-grid {
+  display: grid;
+  gap: 18px;
+  margin-top: 22px;
+}
+.input-group {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.input-group input {
+  width: 100%;
+  padding: 16px 18px;
+  border-radius: 20px;
+  border: 1px solid rgba(148, 163, 184, 0.16);
+  background: rgba(15, 23, 42, 0.5);
+  color: var(--text);
+  outline: none;
+  font-size: 1rem;
+}
+.input-group input::placeholder {
+  color: #94a3b8;
+}
+.panel button {
+  margin-top: 8px;
+  padding: 16px 22px;
+  border-radius: 20px;
+  border: none;
+  background: linear-gradient(135deg, #6366f1, #0ea5e9);
+  color: white;
+  font-weight: 700;
+  cursor: pointer;
+  transition: transform 0.2s ease, filter 0.2s ease;
+}
+.panel button:hover {
+  transform: translateY(-2px);
+  filter: brightness(1.05);
+}
+.support {
+  display: grid;
+  gap: 16px;
+  margin-top: 30px;
+}
+.support-card {
+  display: grid;
+  gap: 12px;
+  padding: 20px;
+  border-radius: 24px;
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(148, 163, 184, 0.12);
+}
+.support-card strong {
+  display: block;
+  color: #e2e8f0;
+  font-size: 0.98rem;
+}
+.support-card span {
+  color: var(--muted);
+  font-size: 0.93rem;
+}
+.footer {
+  text-align: center;
+  margin: 42px auto 0;
+  color: rgba(226, 232, 240, 0.72);
+  font-size: 0.95rem;
+}
+@media (max-width: 920px) {
+  .header {
+    grid-template-columns: 1fr;
+  }
+}
+@media (max-width: 680px) {
+  body {
+    padding: 20px;
+  }
+  .panel {
+    padding: 26px;
+  }
+}
+</style>
+</head>
+<body>
+<div class="page">
+  <section class="header">
+    <div>
+      <div class="brand">
+        <div class="brand-mark"><span>TF</span></div>
+        <div>
+          <p style="margin:0;font-size:0.95rem;color:#94a3b8;letter-spacing:0.14em;text-transform:uppercase;">Track Fácil</p>
+          <p style="margin:6px 0 0;font-size:0.94rem;color:#cbd5e1;">Seguimiento inteligente para envíos empresariales</p>
+        </div>
+      </div>
+      <h1 class="title">Rastrea tus envíos con claridad y sin complicaciones</h1>
+      <p class="subtitle">Una experiencia diseñada para profesionales que necesitan información rápida, notificaciones automáticas y una vista limpia que inspire confianza.</p>
+      <div class="features">
+        <div class="feature-item">
+          <div class="feature-icon">🚚</div>
+          <div>
+            <p class="feature-title">Actualización instantánea</p>
+            <p class="feature-text">Comprende el estado del envío al instante sin perder tiempo.</p>
+          </div>
+        </div>
+        <div class="feature-item">
+          <div class="feature-icon">🔔</div>
+          <div>
+            <p class="feature-title">Alertas inteligentes</p>
+            <p class="feature-text">Recibe avisos vía correo y WhatsApp cuando cambie el estado del paquete.</p>
+          </div>
+        </div>
+        <div class="feature-item">
+          <div class="feature-icon">💼</div>
+          <div>
+            <p class="feature-title">Diseño profesional</p>
+            <p class="feature-text">Interfaz seria y moderna que refuerza la confianza con tus clientes.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <aside class="panel">
+      <h2>Control total de tus envíos</h2>
+      <p>Introduce el código de seguimiento y recibe un resumen inmediato del estado. También puedes activar notificaciones para mantener a tu equipo actualizado.</p>
+      <div class="panel-grid">
+        <div class="input-group">
+          <label for="tracking" style="color:#cbd5e1;font-size:0.95rem;">Número de seguimiento</label>
+          <input id="tracking" type="text" placeholder="Ej. MX1234567890" />
+        </div>
+        <div class="input-group">
+          <label for="email" style="color:#cbd5e1;font-size:0.95rem;">Correo electrónico</label>
+          <input id="email" type="email" placeholder="tucorreo@dominio.com" />
+        </div>
+        <div class="input-group">
+          <label for="whatsapp" style="color:#cbd5e1;font-size:0.95rem;">WhatsApp</label>
+          <input id="whatsapp" type="text" placeholder="+52 55 1234 5678" />
+        </div>
+        <button>Enviar y recibir estado</button>
+      </div>
+      <div class="support">
+        <div class="support-card">
+          <strong>Perfecto para equipos logísticos</strong>
+          <span>Centraliza el seguimiento sin sobrecargar a tu cliente con formularios largos.</span>
+        </div>
+        <div class="support-card">
+          <strong>Interfaz pensada para tomar decisiones</strong>
+          <span>Menos ruido visual, más claridad para monitorear entregas.</span>
+        </div>
+      </div>
+    </aside>
+  </section>
+  <div class="footer">Track Fácil — Experiencia moderna para envíos corporativos. Página de presentación profesional.</div>
+</div>
+</body>
+</html>

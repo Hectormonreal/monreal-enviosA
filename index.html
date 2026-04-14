@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Comparación de páginas - Test A/B</title>
+  <style>
+    body { margin: 0; min-height: 100vh; display: grid; place-items: center; font-family: Inter, system-ui, sans-serif; background: linear-gradient(135deg,#f8fafc,#e2e8f0); color: #0f172a; }
+    .container { width: min(540px, calc(100% - 32px)); background: #ffffff; border-radius: 28px; padding: 32px; box-shadow: 0 24px 70px rgba(15,23,42,0.12); text-align: center; }
+    h1 { margin: 0 0 14px; font-size: clamp(2rem, 2.5vw, 2.6rem); }
+    p { margin: 0 0 28px; color: #475569; line-height: 1.75; }
+    .buttons { display: grid; gap: 14px; }
+    a.button, button.button { display: inline-flex; align-items: center; justify-content: center; padding: 16px 20px; border-radius: 14px; font-weight: 700; text-decoration: none; border: none; cursor: pointer; transition: transform 0.15s ease, box-shadow 0.15s ease; }
+    a.button { background: linear-gradient(135deg,#2563eb,#3b82f6); color: white; }
+    a.button:hover { transform: translateY(-1px); box-shadow: 0 16px 30px rgba(37,99,235,0.18); }
+    a.secondary { background: #f8fafc; color: #1e293b; border: 1px solid #cbd5e1; }
+    a.secondary:hover { transform: translateY(-1px); box-shadow: 0 12px 24px rgba(15,23,42,0.08); }
+    button.button { background: #facc15; color: #1e293b; }
+    button.button:hover { transform: translateY(-1px); box-shadow: 0 16px 30px rgba(250,204,21,0.18); }
+    small { display: block; margin-top: 24px; color: #64748b; }
+  </style>
+</head>
+<body>
+  <main class="container">
+    <h1>Elige la mejor versión</h1>
+    <p>Compara las dos páginas creadas en una prueba A/B. Abre cada una en una nueva pestaña y luego utiliza el formulario de valoración para anotar tu preferida.</p>
+    <div class="buttons">
+      <a class="button" href="pagina1.html" target="_blank" aria-label="Abrir primera página" title="Ir a página 1">Primera página</a>
+      <a class="button secondary" href="pagina2.html" target="_blank" aria-label="Abrir segunda página" title="Ir a página 2">Segunda página</a>
+      <button class="button" type="button" aria-label="Formulario de valoración" title="Añade aquí el enlace del formulario más tarde">Formulario de valoración</button>
+    </div>
+    <small>No olvides reemplazar los enlaces vacíos después con las URL correctas de cada página y del formulario.</small>
+  </main>
+</body>
+</html>

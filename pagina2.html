@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Envíos Claros - Versión B</title>
+<style>
+:root {
+  --bg-start: #ffefde;
+  --bg-end: #ffe3c1;
+  --surface: #ffffff;
+  --surface-strong: #fff5ed;
+  --text: #1f2937;
+  --muted: #64748b;
+  --accent: #f97316;
+  --accent-strong: #dc6803;
+  --border: rgba(148, 163, 184, 0.2);
+}
+* {
+  box-sizing: border-box;
+}
+html, body {
+  margin: 0;
+  min-height: 100%;
+}
+body {
+  font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  color: var(--text);
+  background: linear-gradient(135deg, var(--bg-start), var(--bg-end));
+}
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background: radial-gradient(circle at top left, rgba(249, 115, 22, 0.12), transparent 18%),
+              radial-gradient(circle at bottom right, rgba(244, 63, 94, 0.1), transparent 20%);
+  pointer-events: none;
+}
+.page {
+  width: min(1180px, 100%);
+  margin: 0 auto;
+  padding: 28px 24px 48px;
+}
+.hero {
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  gap: 28px;
+  align-items: stretch;
+  margin-top: 24px;
+}
+.hero-copy {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 20px;
+}
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 14px;
+  border-radius: 999px;
+  background: rgba(251, 191, 36, 0.15);
+  color: #b45309;
+  font-size: 0.86rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.title {
+  margin: 0;
+  font-size: clamp(2rem, 4vw, 3.6rem);
+  line-height: 1.03;
+}
+.subtitle {
+  margin: 0;
+  max-width: 640px;
+  font-size: 1rem;
+  line-height: 1.8;
+  color: var(--muted);
+}
+.hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+.primary-btn,
+.secondary-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 14px 22px;
+  border-radius: 999px;
+  text-decoration: none;
+  font-weight: 700;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.primary-btn {
+  background: linear-gradient(135deg, #fb923c, #f97316);
+  color: white;
+}
+.secondary-btn {
+  border: 1px solid rgba(15, 23, 42, 0.12);
+  color: var(--text);
+  background: white;
+}
+.primary-btn:hover,
+.secondary-btn:hover {
+  transform: translateY(-1px);
+}
+.hero-card {
+  background: rgba(255, 255, 255, 0.9);
+  border: 1px solid var(--border);
+  border-radius: 32px;
+  padding: 32px;
+  box-shadow: 0 28px 80px rgba(15, 23, 42, 0.08);
+}
+.hero-card h2 {
+  margin: 0 0 16px;
+  font-size: 1.5rem;
+}
+.track-form {
+  display: grid;
+  gap: 16px;
+}
+.track-form label {
+  font-size: 0.95rem;
+  color: var(--muted);
+}
+.track-form input {
+  width: 100%;
+  padding: 16px 18px;
+  border-radius: 18px;
+  border: 1px solid rgba(148, 163, 184, 0.25);
+  outline: none;
+  font-size: 1rem;
+  background: #fbfbfb;
+}
+.track-form input:focus {
+  border-color: rgba(249, 115, 22, 0.5);
+  box-shadow: 0 0 0 4px rgba(249, 115, 22, 0.12);
+}
+.method-group {
+  display: grid;
+  gap: 12px;
+}
+.method-options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+.method-options label {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 18px;
+  border-radius: 18px;
+  border: 1px solid rgba(148, 163, 184, 0.25);
+  background: #f8fafc;
+  cursor: pointer;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+}
+.method-options label:hover {
+  border-color: rgba(249, 115, 22, 0.5);
+  box-shadow: 0 10px 24px rgba(249, 115, 22, 0.1);
+}
+.method-options input {
+  accent-color: #f97316;
+}
+.additional-input {
+  display: none;
+  gap: 10px;
+}
+.additional-input.active {
+  display: grid;
+}
+.track-form button {
+  padding: 16px 18px;
+  border: none;
+  border-radius: 18px;
+  background: linear-gradient(135deg, #fb923c, #f97316);
+  color: white;
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+.track-form button:hover {
+  opacity: 0.96;
+}
+.status-preview {
+  margin-top: 24px;
+  padding: 20px;
+  border-radius: 22px;
+  background: linear-gradient(180deg, rgba(249, 250, 251, 0.95), rgba(255, 255, 255, 0.82));
+  border: 1px solid rgba(249, 115, 22, 0.18);
+}
+.status-label {
+  display: block;
+  margin-bottom: 10px;
+  color: var(--muted);
+  font-size: 0.92rem;
+}
+.status-preview strong {
+  display: block;
+  font-size: 1.2rem;
+  margin-bottom: 6px;
+}
+.status-preview span {
+  color: var(--muted);
+  line-height: 1.7;
+}
+.highlights {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px;
+  margin: 42px 0 0;
+}
+.card {
+  background: white;
+  border-radius: 28px;
+  padding: 26px;
+  box-shadow: 0 18px 50px rgba(15, 23, 42, 0.06);
+  border: 1px solid rgba(148, 163, 184, 0.12);
+}
+.card h3 {
+  margin-top: 0;
+  font-size: 1.15rem;
+}
+.card p {
+  margin: 12px 0 0;
+  color: var(--muted);
+  line-height: 1.75;
+}
+.steps {
+  display: grid;
+  gap: 18px;
+  margin-top: 32px;
+}
+.step {
+  display: grid;
+  grid-template-columns: 58px 1fr;
+  gap: 18px;
+  padding: 22px;
+  border-radius: 24px;
+  background: rgba(255, 255, 255, 0.9);
+  border: 1px solid rgba(225, 232, 240, 0.8);
+}
+.step-marker {
+  width: 56px;
+  height: 56px;
+  border-radius: 18px;
+  display: grid;
+  place-items: center;
+  background: linear-gradient(135deg, #fb923c, #f97316);
+  color: white;
+  font-weight: 700;
+}
+.step-content h4 {
+  margin: 0 0 6px;
+}
+.step-content p {
+  margin: 0;
+  color: var(--muted);
+  line-height: 1.7;
+}
+.footer {
+  text-align: center;
+  margin: 42px auto 0;
+  padding: 18px 0 0;
+  color: #475569;
+  font-size: 0.95rem;
+}
+@media (max-width: 940px) {
+  .hero {
+    grid-template-columns: 1fr;
+  }
+  .highlights {
+    grid-template-columns: 1fr;
+  }
+}
+@media (max-width: 640px) {
+  .page {
+    padding: 20px 16px 32px;
+  }
+  .hero-card,
+  .card,
+  .step {
+    border-radius: 24px;
+    padding: 22px;
+  }
+  .hero-actions {
+    flex-direction: column;
+  }
+}
+</style>
+</head>
+<body>
+<div class="page">
+  <header class="hero">
+    <div class="hero-copy">
+      <h1 class="title">Seguimiento confiable de envíos</h1>
+      <p class="subtitle">Rastrea tu paquete y recibe alertas por WhatsApp o correo, según el método que prefieras.</p>
+      <div class="hero-actions">
+        <a class="primary-btn" href="#rastreo">Consultar envío</a>
+        <a class="secondary-btn" href="#ventajas">Ver ventajas</a>
+      </div>
+    </div>
+
+    <div class="hero-card" id="rastreo">
+      <h2>Rastreo rápido y notificaciones activas</h2>
+      <form class="track-form">
+        <label for="codigo">Código de seguimiento</label>
+        <input id="codigo" type="text" placeholder="Ej. AX123456789CL" required>
+
+        <div class="method-group">
+          <span class="status-label">Elige cómo quieres recibir alertas</span>
+          <div class="method-options">
+            <label>
+              <input type="radio" name="alert-method" value="whatsapp">
+              WhatsApp
+            </label>
+            <label>
+              <input type="radio" name="alert-method" value="email">
+              Correo electrónico
+            </label>
+          </div>
+        </div>
+
+        <div class="additional-input" id="alert-contact-field">
+          <label for="alert-contact">Selecciona un método para ver el campo</label>
+          <input id="alert-contact" type="text" placeholder="Selecciona WhatsApp o correo" disabled>
+        </div>
+
+        <button type="submit">Buscar paquete</button>
+      </form>
+      <div class="status-preview" aria-live="polite">
+        <span class="status-label">Estado sugerido</span>
+        <strong>En tránsito</strong>
+        <span>Salida de bodega en México · actualizaciones en tiempo real</span>
+      </div>
+    </div>
+  </header>
+
+  <section class="highlights" id="ventajas">
+    <div class="card">
+      <h3>Entrega con información clara</h3>
+      <p>Los usuarios ven el estado de su envío de forma rápida y reconocen qué pasos siguen antes de la entrega.</p>
+    </div>
+    <div class="card">
+      <h3>Notificaciones personalizadas</h3>
+      <p>Permite que los clientes elijan entre correo o WhatsApp para no perder ningún movimiento del paquete.</p>
+    </div>
+    <div class="card">
+      <h3>Diseño enfocado en conversión</h3>
+      <p>Interfaz ligera y con llamadas claras a la acción para mejorar la experiencia y la confianza del usuario.</p>
+    </div>
+  </section>
+
+  <section class="steps" aria-label="Cómo usar">
+    <div class="step">
+      <div class="step-marker">1</div>
+      <div class="step-content">
+        <h4>Introduce tu código</h4>
+        <p>El formulario principal está diseñado para ser rápido, con entrada amplia y fácil lectura.</p>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-marker">2</div>
+      <div class="step-content">
+        <h4>Revisa el estado</h4>
+        <p>El panel de estado muestra la situación actual del paquete y el último movimiento relevante.</p>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-marker">3</div>
+      <div class="step-content">
+        <h4>Activa alertas</h4>
+        <p>Ofrece opciones de contacto para que los usuarios reciban notificaciones sin perder conexión.</p>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    Esta página está diseñada para que el usuario rastree su envío y reciba alertas de forma clara y profesional.
+  </footer>
+</div>
+<script>
+  const methodRadios = document.querySelectorAll('input[name="alert-method"]');
+  const alertField = document.getElementById('alert-contact-field');
+  const alertInput = document.getElementById('alert-contact');
+  const alertLabel = alertField.querySelector('label');
+
+  function updateAlertField() {
+    const selectedMethod = document.querySelector('input[name="alert-method"]:checked');
+    if (!selectedMethod) {
+      alertField.classList.remove('active');
+      alertInput.value = '';
+      alertInput.placeholder = 'Selecciona WhatsApp o correo';
+      alertInput.disabled = true;
+      return;
+    }
+
+    alertInput.disabled = false;
+    if (selectedMethod.value === 'whatsapp') {
+      alertLabel.textContent = 'Número de WhatsApp';
+      alertInput.type = 'tel';
+      alertInput.placeholder = 'Ej. +5215512345678';
+      alertInput.autocomplete = 'tel';
+      alertInput.value = '';
+    } else {
+      alertLabel.textContent = 'Correo electrónico';
+      alertInput.type = 'email';
+      alertInput.placeholder = 'ejemplo@dominio.com';
+      alertInput.autocomplete = 'email';
+      alertInput.value = '';
+    }
+    alertField.classList.add('active');
+  }
+
+  methodRadios.forEach((radio) => {
+    radio.addEventListener('change', updateAlertField);
+  });
+
+  document.querySelector('.track-form').addEventListener('submit', (event) => {
+    const selectedMethod = document.querySelector('input[name="alert-method"]:checked');
+    if (!selectedMethod) {
+      event.preventDefault();
+      alert('Por favor selecciona cómo deseas recibir alertas: WhatsApp o correo.');
+      return;
+    }
+    if (!alertInput.value.trim()) {
+      event.preventDefault();
+      alert('Introduce tu número de WhatsApp o correo electrónico para recibir alertas.');
+    }
+  });
+</script>
+</body>
+</html>
